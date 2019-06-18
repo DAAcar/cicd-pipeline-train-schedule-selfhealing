@@ -13,6 +13,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            try {
             when {
                 branch 'master'
             }
@@ -23,6 +24,9 @@ pipeline {
                         sh 'echo Hello, World!'
                     }
                 }
+            }
+            } catch (ex) {
+                echo 'error in build docker image' }
             }
         }
         stage('Push Docker Image') {
